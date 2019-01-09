@@ -13,3 +13,5 @@ m3
 m4
 
 next(); lets wexpress know to go to the next middleware on the stack.
+
+any peice of middle ware has access to the req, and res and 
