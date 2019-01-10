@@ -1,29 +1,30 @@
 const express = require('express');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const cors = require('cors');
+
 
 const server = express();
 
+
+const configureMiddleware = require('../config/middleware.js')
 // Global middleware
+configureMiddleware(server);
 
-// a peice of middle ware that is used to provide some basic/default security to onnonimze the headers
-server.use(helmet());
+// // a peice of middle ware that is used to provide some basic/default security to onnonimze the headers
+// server.use(helmet());
 
-// how we use /implement preset middleware into out server.
-server.use(express.json()); // built in
+// // how we use /implement preset middleware into out server.
+// server.use(express.json()); // built in
 
-server.use(morgan('short')); // logging middleware,  //kind of a tracer
+// server.use(morgan('short')); // logging middleware,  //kind of a tracer
 
-// helps top issues accross domains, it is a security feature
-server.use(cors());
+// // helps stop issues accross domains, it is a security feature
+// server.use(cors());
 
 
 
 server.use(doubler);
 
 
-function doubler(req,res, next) {
+function doubler(req, res, next) {
     const value= req.query.number || 0;
 
     if (value) {
@@ -51,12 +52,12 @@ server.get('/double', doubler, (req, res) => {
     and the doubler is ${req.double} !`);
 });
 
-server.get('/;id', (req, res) => {
+server.get('/:id', (req, res) => {
     res.send(`check success id: ${req.params.id}`);
 });
 
 // with your endpoint rougt  you want the most specific firs and the mor general routes after.
-// specific routes fist, catch all routes at the end.
+// specific routeserver dfsaasadfas fist, catch all routes at the end.
 module.exports = server;
 
 
