@@ -7,10 +7,6 @@ module.exports= (req, res, next) {
         next();
 
     } else {
-        res.status(400).send('please provide a number');
+        return res.status(400).send('please provide a number');
     }
-
-
-
-    next();
-}
+};
