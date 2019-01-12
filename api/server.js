@@ -1,10 +1,12 @@
 const express = require('express');
+const configureMiddleware = require('../config/middleware');
+const doubler = require('../common/doubleMiddleware');
+const apiRouter = require('../api/apiRouter');
 
 
 const server = express();
 
 
-const configureMiddleware = require('../config/middleware.js')
 // Global middleware
 configureMiddleware(server);
 
@@ -20,29 +22,22 @@ configureMiddleware(server);
 // server.use(cors());
 
 
-const double = require();
-server.use(doubler);
+// const double = require();
+// server.use(doubler);
 
 
-function doubler(req, res, next) {
-    const value= req.query.number || 0;
-
-    if (value) {
-        req.double = value * 2;
-
-    } else {
-        res.status(400).send('please provide a number');
-    }
-
-
-
-    next();
-}
+// middleware
+configureMiddleware(server);
+server.use('/api', apiRouter);
 
 
 //routes
+server.get('orders', (req, res) => {
+    res.send(`GET /orders endpoint`);
+});
+
 server.get('/', (req, res) => {
-    res.send(`sanity check success`);
+    res.send(` check success double: ${req.double}`);
 });
 
 
@@ -53,7 +48,7 @@ server.get('/double', doubler, (req, res) => {
 });
 
 server.get('/:id', (req, res) => {
-    res.send(`check success id: ${req.params.id}`);
+    res.send(`check success, id: ${req.params.id}`);
 });
 
 // with your endpoint rougt  you want the most specific firs and the mor general routes after.
@@ -62,7 +57,7 @@ module.exports = server;
 
 
 
-// http://localhost:5000/?number=3
+`http://localhost:5000/?number=3`;
 
 // // public stuff
 // module.exports = {

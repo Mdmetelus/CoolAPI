@@ -1,9 +1,9 @@
-const server = require('./server.js');
+const server = require('./api/server.js');
 
 
 // enable dynamic ports for hosting provider
 const port = process.env.PORT || 5678;
-server.listen(5000, () => console.log('The Server is listening on port 5ooo, 5k'));
+server.listen(port, () => console.log(`The Server is listening on port ${port}.`));
 
 // console.log('\nindex.js\n');
 
