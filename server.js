@@ -20,7 +20,7 @@ configureMiddleware(server);
 // server.use(cors());
 
 
-
+const double = require();
 server.use(doubler);
 
 
